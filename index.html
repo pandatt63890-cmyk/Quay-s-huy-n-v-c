@@ -3,83 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huyền Vực - Tuyển Nhân Đợt 2</title>
+    <title>Huyền Vực - Đợt 2</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --red: #D32F2F; --gold: #FFD700; --bg: #121212; --card: #1E1E1E; }
+        :root { --red: #D32F2F; --gold: #FFD700; --bg: #121212; }
         body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .container { text-align: center; padding: 30px; border-radius: 20px; background: var(--card); border: 2px solid var(--red); box-shadow: 0 0 30px rgba(211, 47, 47, 0.2); width: 100%; max-width: 450px; }
-        h1 { font-weight: 900; font-size: 1.8em; margin: 0; color: var(--red); letter-spacing: 2px; text-transform: uppercase; }
-        .sub { font-size: 0.7em; color: var(--gold); margin-bottom: 25px; font-weight: 700; letter-spacing: 1px; }
-        #result { font-size: 1.4em; min-height: 120px; margin: 20px 0; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; border: 1px solid rgba(211, 47, 47, 0.3); line-height: 1.4; }
-        .spin-btn { background: var(--red); color: white; border: none; padding: 18px; font-size: 1.1em; font-weight: 800; cursor: pointer; border-radius: 12px; width: 100%; text-transform: uppercase; transition: 0.3s; box-shadow: 0 4px 0 #8B0000; }
+        .container { text-align: center; padding: 35px; border-radius: 20px; background: #1E1E1E; border: 2px solid var(--red); box-shadow: 0 0 30px rgba(211, 47, 47, 0.3); width: 100%; max-width: 420px; }
+        h1 { font-weight: 900; font-size: 2em; margin: 0; color: var(--red); letter-spacing: 2px; text-transform: uppercase; }
+        .sub { font-size: 0.75em; color: var(--gold); margin-bottom: 30px; font-weight: 700; letter-spacing: 1px; }
+        #result { font-size: 1.5em; min-height: 130px; margin: 20px 0; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; background: rgba(0,0,0,0.4); border-radius: 15px; padding: 20px; border: 1px solid rgba(211, 47, 47, 0.4); line-height: 1.4; }
+        .spin-btn { background: var(--red); color: white; border: none; padding: 20px; font-size: 1.2em; font-weight: 800; cursor: pointer; border-radius: 12px; width: 100%; text-transform: uppercase; transition: 0.3s; box-shadow: 0 5px 0 #8B0000; }
         .spin-btn:hover:not(:disabled) { background: #FF5252; transform: translateY(-2px); }
-        .spin-btn:active { transform: translateY(2px); box-shadow: none; }
+        .spin-btn:active { transform: translateY(3px); box-shadow: none; }
         .spin-btn:disabled { background: #444; color: #888; box-shadow: none; cursor: not-allowed; }
-        .reset-btn { background: transparent; color: #666; border: none; padding: 10px; font-size: 0.7em; cursor: pointer; margin-top: 20px; text-decoration: underline; font-weight: 700; }
-        .status { font-size: 0.75em; color: #888; margin-top: 10px; font-weight: 600; }
+        .reset-link { background: transparent; color: #666; border: none; padding: 10px; font-size: 0.75em; cursor: pointer; margin-top: 25px; text-decoration: underline; font-weight: 700; display: block; width: 100%; }
+        .status { font-size: 0.8em; color: #888; margin-top: 15px; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>HUYỀN VỰC</h1>
-        <div class="sub">PHÁT TUYỂN ĐỢT 02 (1/2026)</div>
-        <div id="result">KÍNH MỜI KHỞI QUAY</div>
+        <div class="sub">XÍCH MA GIỚI - ĐỊNH MỆNH (ĐỢT 02)</div>
+        <div id="result">NHẤN QUAY ĐỂ KHỞI ĐẦU</div>
         <button id="spinBtn" class="spin-btn" onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
-        <div class="status" id="count">Đang triệu hồi...</div>
-        <button class="reset-btn" onclick="resetData()">LÀM MỚI DANH SÁCH (100 CĂN CỐT)</button>
+        <div class="status" id="countDisplay">Đang tải căn cốt...</div>
+        <button class="reset-link" onclick="forceReset()">KHÔI PHỤC DANH SÁCH 100 SLOT</button>
     </div>
 
     <script>
-        const STORAGE_KEY = 'HUYENVUC_DOT2_V1';
+        // Sử dụng một Key hoàn toàn mới để trình duyệt không đọc lại rác cũ
+        const CACHE_KEY = 'HUYENVUC_REMAKE_FINAL_V1';
 
         const config = [
             // THIÊN GIỚI
-            { name: "Thiên Giới: Hoàng tử/Công chúa", qty: 5 },
             { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
             { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
-            { name: "Thiên Giới: Thần Thú Huyền Vũ", qty: 1 },
-            { name: "Thiên Giới: Lôi Thần", qty: 1 },
-            { name: "Thiên Giới: Thập Nhị Tiên Cô", qty: 12 },
-            { name: "Thiên Giới: Tiểu thần", qty: 5 },
+            { name: "Thần Thú: Huyền Vũ", qty: 1 },
+            { name: "Ngũ Hành: Lôi Thần", qty: 1 },
+            { name: "Thập Nhị Tiên Cô", qty: 12 },
+            { name: "Thiên Giới: Tiểu thần", qty: 10 },
             { name: "Thiên Giới: Tiên tử", qty: 2 },
             { name: "Thiên Giới: Quy tộc (Ngọc Quy Trại)", qty: 5 },
             { name: "Thiên Giới: Hùng tộc (Hành Tôn Sơn)", qty: 5 },
             // NHÂN GIỚI
-            { name: "Trường Minh Quốc: Hoàng Đế", qty: 1 },
-            { name: "Trường Minh Quốc: Hoàng Hậu", qty: 1 },
-            { name: "Trường Minh Quốc: Hoàng Quý Phi", qty: 1 },
-            { name: "Trường Minh Quốc: Quý Phi", qty: 2 },
-            { name: "Trường Minh Quốc: Thái tử", qty: 1 },
-            { name: "Trường Minh Quốc: Thái tử phi", qty: 1 },
+            { name: "Nhân Giới: Hoàng Đế", qty: 1 },
+            { name: "Nhân Giới: Hoàng Hậu", qty: 1 },
+            { name: "Nhân Giới: Hoàng Quý Phi", qty: 1 },
+            { name: "Nhân Giới: Quý Phi", qty: 2 },
+            { name: "Nhân Giới: Thái tử", qty: 1 },
+            { name: "Nhân Giới: Thái tử phi", qty: 1 },
             { name: "Cung đình: Tổng quản", qty: 1 },
             { name: "Cung đình: Mama", qty: 2 },
             { name: "Cung đình: Thái y", qty: 5 },
             { name: "Triều đình: Quốc Sư", qty: 1 },
             { name: "Triều đình: Nguyên Soái", qty: 1 },
+            { name: "Triều đình: Quan Võ", qty: 5 },
             { name: "Làng Yên Hạ: Trưởng làng", qty: 1 },
-            { name: "Làng Yên Hạ: Phu nhân", qty: 1 },
             { name: "Làng Yên Hạ: Trưởng lão", qty: 4 },
             { name: "Làng Yên Hạ: Đại phu", qty: 1 },
             { name: "Làng Giang Yết: Trưởng làng", qty: 1 },
-            { name: "Làng Giang Yết: Phu nhân", qty: 1 },
             { name: "Làng Giang Yết: Trưởng lão", qty: 4 },
             { name: "Làng Giang Yết: Đại phu", qty: 2 },
             { name: "Làng Đoan Di: Trưởng làng", qty: 1 },
-            { name: "Làng Đoan Di: Phu nhân", qty: 1 },
             { name: "Làng Đoan Di: Trưởng lão", qty: 4 },
             { name: "Làng Đoan Di: Đại phu", qty: 1 },
             // MA GIỚI
-            { name: "Ma Giới: Hoàng tử/Công chúa", qty: 5 },
             { name: "Ma Giới: Ma thần", qty: 1 },
             { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
             { name: "Ma Giới: Ma thú Đào Ngột", qty: 1 },
-            { name: "Ma Giới: Tiểu ma quân", qty: 4 },
+            { name: "Ma Giới: Tiểu ma quân", qty: 5 },
             { name: "Ma Giới: Tiểu quỷ", qty: 5 },
             // ÂM GIỚI & YÊU GIỚI
             { name: "Âm Giới: Thập Đại Diêm La", qty: 10 },
-            { name: "Âm Giới: Ngưu đầu Mã diện", qty: 5 },
-            { name: "Yêu Giới: Hoàng tử/Công chúa", qty: 5 },
+            { name: "Âm Giới: Ngưu đầu Mã diện", qty: 2 },
             { name: "Yêu Giới: Tộc Giao nhân", qty: 1 },
             { name: "Yêu Giới: Tộc Miêu tinh", qty: 1 },
             { name: "Yêu Giới: Tộc Xà tinh", qty: 1 },
@@ -87,49 +83,54 @@
             { name: "Yêu Giới: Tộc Hùng Tinh", qty: 1 }
         ];
 
-        function createList() {
-            let list = [];
-            config.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
-            return list;
+        function buildList() {
+            let temp = [];
+            config.forEach(item => { for(let i=0; i<item.qty; i++) temp.push(item.name); });
+            return temp;
         }
 
-        let chars = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createList();
+        let currentChars = JSON.parse(localStorage.getItem(CACHE_KEY)) || buildList();
 
-        function updateUI() {
-            document.getElementById('count').innerText = "CÒN LẠI: " + chars.length + " SUẤT";
-            document.getElementById('spinBtn').disabled = chars.length === 0;
-            if(chars.length === 0) document.getElementById('result').innerText = "HẾT NHÂN VẬT";
+        function updateDisplay() {
+            document.getElementById('countDisplay').innerText = "CĂN CỐT CÒN LẠI: " + currentChars.length;
+            const b = document.getElementById('spinBtn');
+            if(currentChars.length === 0) {
+                document.getElementById('result').innerText = "THIÊN MỆNH ĐÃ HẾT";
+                b.disabled = true;
+            } else { b.disabled = false; }
         }
 
         function spin() {
             const btn = document.getElementById('spinBtn');
             const res = document.getElementById('result');
             btn.disabled = true;
+            
             let i = 0;
             const timer = setInterval(() => {
-                res.innerText = chars[Math.floor(Math.random() * chars.length)];
+                res.innerText = currentChars[Math.floor(Math.random() * currentChars.length)];
                 if(++i > 20) {
                     clearInterval(timer);
-                    const idx = Math.floor(Math.random() * chars.length);
-                    const winner = chars[idx];
-                    res.innerHTML = `<span style="color:var(--gold); font-size:0.6em; display:block;">KẾT QUẢ</span>${winner}`;
-                    chars.splice(idx, 1);
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
-                    updateUI();
+                    const idx = Math.floor(Math.random() * currentChars.length);
+                    const winner = currentChars[idx];
+                    res.innerHTML = `<span style="color:var(--gold); font-size:0.6em; display:block; margin-bottom:5px;">TRIỆU HỒI THÀNH CÔNG</span>${winner}`;
+                    currentChars.splice(idx, 1);
+                    localStorage.setItem(CACHE_KEY, JSON.stringify(currentChars));
+                    updateDisplay();
                     btn.disabled = false;
                 }
             }, 60);
         }
 
-        function resetData() {
-            if(confirm("Làm mới danh sách 100 căn cốt?")) {
-                chars = createList();
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
-                document.getElementById('result').innerText = "KÍNH MỜI KHỞI QUAY";
+        function forceReset() {
+            if(confirm("Khôi phục lại danh sách 100 nhân vật mới nhất?")) {
+                currentChars = buildList();
+                localStorage.setItem(CACHE_KEY, JSON.stringify(currentChars));
+                document.getElementById('result').innerText = "NHẤN QUAY ĐỂ KHỞI ĐẦU";
                 updateUI();
             }
         }
-        updateUI();
+
+        updateDisplay();
     </script>
 </body>
 </html>
