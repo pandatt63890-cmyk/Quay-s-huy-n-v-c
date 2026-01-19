@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huyền Vực - Vòng Quay Định Mệnh</title>
+    <title>Huyền Vực - Xích Ma Giới</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Sử dụng font hệ thống cao cấp nhất để đảm bảo độ sắc nét */
         :root { 
-            --primary: #8E8FFA; 
-            --accent: #C2D9FF;
-            --bg: #F8F9FF;
-            --text-dark: #2D3250;
+            --main-red: #D32F2F; /* Đỏ hoàng gia */
+            --dark-red: #8B0000;
+            --gold: #FFD700;
+            --bg-black: #1A1A1A;
         }
 
         body { 
-            background: var(--bg); 
-            color: var(--text-dark); 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-black); 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -26,206 +26,191 @@
             padding: 20px;
         }
 
-        .card { 
-            background: #ffffff; 
-            padding: 40px 30px; 
-            border-radius: 32px; 
-            box-shadow: 0 20px 60px rgba(142, 143, 250, 0.1); 
+        .container { 
+            text-align: center; 
+            padding: 40px 25px; 
+            border-radius: 20px; 
+            background: #262626; 
+            border: 2px solid var(--main-red);
+            box-shadow: 0 0 30px rgba(211, 47, 47, 0.3); 
             width: 100%; 
             max-width: 400px; 
-            text-align: center;
         }
 
         h1 { 
-            font-size: 24px; 
-            font-weight: 800; 
-            letter-spacing: -0.5px;
-            margin: 0 0 8px 0;
-            color: var(--text-dark);
-        }
-
-        .tagline {
-            font-size: 13px;
+            font-weight: 900; 
+            font-size: 2em; 
+            margin: 0; 
+            color: var(--main-red);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #A0A0C0;
-            font-weight: 600;
-            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
         }
 
-        #result-box { 
+        .sub {
+            font-size: 0.75em;
+            color: var(--gold);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        #result-display { 
+            font-size: 1.5em; 
             min-height: 120px; 
-            margin-bottom: 30px; 
+            margin: 20px 0; 
             display: flex; 
-            flex-direction: column;
             align-items: center; 
             justify-content: center; 
-            background: #F1F4FF;
-            border-radius: 24px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .res-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-            opacity: 0.8;
-        }
-
-        #result-text {
-            font-size: 1.5em; 
+            text-align: center; 
             font-weight: 700; 
-            color: var(--text-dark);
-            line-height: 1.3;
+            background: rgba(211, 47, 47, 0.1);
+            border: 1px solid rgba(211, 47, 47, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            color: #ffffff;
+            line-height: 1.4;
         }
         
-        .spin-button { 
-            background: var(--text-dark); 
-            color: #ffffff; 
+        .spin-btn { 
+            background: var(--main-red); 
+            color: #fff; 
             border: none; 
-            padding: 20px; 
-            font-size: 16px; 
-            font-weight: 700;
-            border-radius: 18px; 
+            padding: 18px; 
+            font-size: 1.1em; 
+            font-weight: 800;
             cursor: pointer; 
+            border-radius: 10px; 
+            transition: 0.3s; 
             width: 100%; 
-            transition: all 0.2s;
-            box-shadow: 0 10px 20px rgba(45, 50, 80, 0.2);
-        }
-
-        .spin-button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            background: #424769;
-        }
-
-        .spin-button:active { transform: translateY(0); }
-        .spin-button:disabled { background: #CBD5E0; cursor: not-allowed; box-shadow: none; }
-        
-        .reset-link { 
-            display: inline-block;
-            margin-top: 25px;
-            font-size: 12px;
-            color: #FF8E8E;
-            text-decoration: none;
-            font-weight: 700;
-            cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            box-shadow: 0 4px 0 var(--dark-red);
         }
 
-        .counter { 
-            margin-top: 15px;
-            font-size: 12px; 
-            color: #B0B0C0; 
+        .spin-btn:hover:not(:disabled) {
+            background: #FF5252;
+            transform: translateY(-2px);
+        }
+
+        .spin-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        .spin-btn:disabled { 
+            background: #444; 
+            color: #888; 
+            box-shadow: none;
+            cursor: not-allowed; 
+        }
+        
+        .reset-btn { 
+            background: transparent; 
+            color: #666; 
+            border: none;
+            padding: 10px; 
+            font-size: 0.7em; 
+            cursor: pointer; 
+            margin-top: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+        .status { 
+            font-size: 0.75em; 
+            color: #888; 
+            margin-top: 10px; 
             font-weight: 600; 
         }
     </style>
 </head>
 <body>
-
-    <div class="card">
-        <h1>Huyền Vực</h1>
-        <div class="tagline">Định Mệnh Luân Hồi</div>
+    <div class="container">
+        <h1>HUYỀN VỰC</h1>
+        <div class="sub">XÍCH MA GIỚI - ĐỊNH MỆNH</div>
         
-        <div id="result-box">
-            <div id="res-label" style="display:none" class="res-label">KẾT QUẢ</div>
-            <div id="result-text">Sẵn sàng khởi quay</div>
-        </div>
+        <div id="result-display">NHẤN QUAY ĐỂ KHỞI ĐẦU</div>
         
-        <button id="spinBtn" class="spin-button" onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
+        <button id="spinBtn" class="spin-btn" onclick="startSpin()">KHAI THIÊN LẬP ĐỊA</button>
         
-        <div class="counter" id="count">Đang tải dữ liệu...</div>
-        <div class="reset-link" onclick="resetData()">Làm mới danh sách</div>
+        <div class="status" id="countDisplay">Đang triệu hồi...</div>
+        <button class="reset-btn" onclick="resetSystem()">KHÔI PHỤC DANH SÁCH</button>
     </div>
 
     <script>
-        const KEY_STORE = 'HUYENVUC_V10_LUXURY';
+        // Key mới để không bị kẹt bộ nhớ cũ
+        const STORAGE_KEY = 'HUYENVUC_RED_V1';
 
-        // Danh sách rút gọn sạch sẽ (Bạn có thể thêm tiếp vào đây)
-        const charConfig = [
+        const rawData = [
             { name: "Hoàng Đế Trường Minh Quốc", qty: 1 },
             { name: "Hoàng Hậu Trường Minh Quốc", qty: 1 },
             { name: "Thái tử Trường Minh Quốc", qty: 1 },
-            { name: "Hoàng Quý Phi", qty: 1 },
-            { name: "Quý Phi", qty: 2 },
-            { name: "Quốc Sư", qty: 1 },
-            { name: "Thừa Tướng", qty: 1 },
-            { name: "Thanh Long", qty: 1 },
-            { name: "Huyền Vũ", qty: 1 },
-            { name: "Chu Tước", qty: 1 },
             { name: "Ma Thần Ma Giới", qty: 1 },
             { name: "Thập Nhị Tà Thần", qty: 12 },
-            { name: "Đông Thiên Vương", qty: 1 },
-            { name: "Tây Thiên Vương", qty: 1 },
+            { name: "Thanh Long Thần Thú", qty: 1 },
+            { name: "Huyền Vũ Thần Thú", qty: 1 },
+            { name: "Chu Tước Thần Thú", qty: 1 },
             { name: "Bạch Vô Thường", qty: 1 },
-            { name: "Hồ tộc Vạn Cốc Sơn", qty: 1 },
-            { name: "Long tộc Long Sơn", qty: 1 },
-            { name: "Đại phu Làng Yên Hạ", qty: 2 }
+            { name: "Quốc Sư", qty: 1 },
+            { name: "Thừa Tướng", qty: 1 },
+            { name: "Nguyên Soái", qty: 1 },
+            { name: "Đại phu Làng Yên Hạ", qty: 2 },
+            { name: "Đại phu Làng Giang Yết", qty: 2 },
+            { name: "Đại phu Làng Đoan Di", qty: 2 }
         ];
 
-        function initList() {
-            let fullList = [];
-            charConfig.forEach(item => {
-                for(let i=0; i<item.qty; i++) fullList.push(item.name);
-            });
-            return fullList;
+        function createList() {
+            let list = [];
+            rawData.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
+            return list;
         }
 
-        let currentChars = JSON.parse(localStorage.getItem(KEY_STORE)) || initList();
+        let chars = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createList();
 
-        function updateDisplay() {
-            document.getElementById('count').innerText = "CÒN LẠI " + currentChars.length + " SUẤT";
-            const btn = document.getElementById('spinBtn');
-            if(currentChars.length === 0) {
-                document.getElementById('result-text').innerText = "Hết lượt quay";
-                btn.disabled = true;
-            } else {
-                btn.disabled = false;
-            }
+        function refreshUI() {
+            document.getElementById('countDisplay').innerText = "CĂN CỐT CÒN LẠI: " + chars.length;
+            const b = document.getElementById('spinBtn');
+            if(chars.length === 0) {
+                document.getElementById('result-display').innerText = "VẠN VẬT ĐÃ AN BÀI";
+                b.disabled = true;
+            } else { b.disabled = false; }
         }
 
-        function spin() {
+        function startSpin() {
             const btn = document.getElementById('spinBtn');
-            const resText = document.getElementById('result-text');
-            const resLabel = document.getElementById('res-label');
-            
+            const display = document.getElementById('result-display');
             btn.disabled = true;
-            resLabel.style.display = 'none';
             
-            let counter = 0;
-            const interval = setInterval(() => {
-                resText.innerText = currentChars[Math.floor(Math.random() * currentChars.length)];
-                counter++;
-                
-                if(counter > 20) {
-                    clearInterval(interval);
-                    const finalIdx = Math.floor(Math.random() * currentChars.length);
-                    const finalChar = currentChars[finalIdx];
+            let i = 0;
+            const timer = setInterval(() => {
+                display.innerText = chars[Math.floor(Math.random() * chars.length)];
+                i++;
+                if(i > 20) {
+                    clearInterval(timer);
+                    const idx = Math.floor(Math.random() * chars.length);
+                    const winner = chars[idx];
                     
-                    resText.innerText = finalChar;
-                    resLabel.style.display = 'block';
+                    display.innerHTML = "<span style='color:var(--gold); font-size:0.7em; display:block; margin-bottom:5px;'>KẾT QUẢ TRIỆU HỒI</span>" + winner;
                     
-                    currentChars.splice(finalIdx, 1);
-                    localStorage.setItem(KEY_STORE, JSON.stringify(currentChars));
-                    updateDisplay();
+                    chars.splice(idx, 1);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
+                    refreshUI();
                     btn.disabled = false;
                 }
             }, 60);
         }
 
-        function resetData() {
-            if(confirm("Xác nhận làm mới toàn bộ danh sách nhân vật?")) {
-                currentChars = initList();
-                localStorage.setItem(KEY_STORE, JSON.stringify(currentChars));
-                document.getElementById('res-label').style.display = 'none';
-                document.getElementById('result-text').innerText = "Sẵn sàng khởi quay";
-                updateDisplay();
+        function resetSystem() {
+            if(confirm("Làm mới lại toàn bộ danh sách?")) {
+                chars = createList();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
+                document.getElementById('result-display').innerText = "NHẤN QUAY ĐỂ KHỞI ĐẦU";
+                refreshUI();
             }
         }
 
-        updateDisplay();
+        refreshUI();
     </script>
 </body>
 </html>
