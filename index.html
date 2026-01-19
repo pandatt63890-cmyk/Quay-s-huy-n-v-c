@@ -3,206 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huyền Vực - Định Mệnh</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    
+    <title>Huyền Vực - Thiên Mệnh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #D1D1FB; --dark: #483D8B; --bg: #F8F8FF; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--dark); 
-            font-family: 'Playfair Display', serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            padding: 20px;
-            background-image: radial-gradient(circle, #ffffff, #E6E6FA);
-        }
-
-        .container { 
-            text-align: center; 
-            border: 1px solid rgba(72, 61, 139, 0.2); 
-            padding: 40px; 
-            border-radius: 30px; 
-            background: rgba(255, 255, 255, 0.8); 
-            box-shadow: 0 20px 50px rgba(122, 122, 205, 0.15); 
-            width: 100%; 
-            max-width: 480px; 
-            backdrop-filter: blur(10px);
-        }
-
-        h1 { 
-            font-family: 'Cinzel', serif; 
-            font-weight: 700; 
-            font-size: 2.2em;
-            margin-bottom: 5px; 
-            letter-spacing: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        p.subtitle {
-            font-style: italic;
-            font-size: 0.9em;
-            color: #8E8EBC;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        #result { 
-            font-size: 1.5em; 
-            min-height: 140px; 
-            margin: 25px 0; 
-            color: var(--dark); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            font-weight: 800; 
-            font-style: italic;
-            border-top: 1px double var(--primary);
-            border-bottom: 1px double var(--primary);
-            padding: 20px;
-            line-height: 1.6;
-        }
-        
-        .main-btn { 
-            background: var(--dark); 
-            color: #fff; 
-            border: none; 
-            padding: 20px; 
-            font-size: 1.1em; 
-            font-family: 'Cinzel', serif;
-            cursor: pointer; 
-            border-radius: 5px; 
-            transition: 0.4s; 
-            width: 100%; 
-            font-weight: bold; 
-            letter-spacing: 3px;
-            box-shadow: 0 4px 15px rgba(72, 61, 139, 0.3);
-            margin-bottom: 20px;
-        }
-
-        .main-btn:hover:not(:disabled) {
-            background: #2F2F4F;
-            letter-spacing: 5px;
-            transform: translateY(-3px);
-        }
-
-        .main-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
-        
-        .reset-btn { 
-            background: transparent; 
-            color: #aaa; 
-            border: 1px solid #ddd; 
-            padding: 8px 15px; 
-            font-size: 0.7em; 
-            cursor: pointer; 
-            border-radius: 4px; 
-            font-family: sans-serif;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .reset-btn:hover { color: #f66; border-color: #f66; }
-
-        .status { font-size: 0.8em; color: #8E8EBC; margin-top: 20px; letter-spacing: 1px; }
+        :root { --primary: #D1D1FB; --dark: #301934; --bg: #FDFBFF; }
+        body { background: var(--bg); color: var(--dark); font-family: 'Playfair Display', serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { text-align: center; border: 1px solid rgba(48, 25, 52, 0.1); padding: 40px; border-radius: 20px; background: #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.05); width: 100%; max-width: 450px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.2em; margin-bottom: 5px; letter-spacing: 4px; }
+        #result { font-size: 1.4em; min-height: 120px; margin: 25px 0; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 900; font-style: italic; border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); padding: 15px; }
+        .main-btn { background: var(--dark); color: #fff; border: none; padding: 18px; font-size: 1.1em; font-family: 'Cinzel', serif; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; letter-spacing: 2px; }
+        .main-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .reset-btn { background: transparent; color: #cc0000; border: 1px solid #ffcccc; padding: 8px 15px; font-size: 0.7em; cursor: pointer; border-radius: 4px; margin-top: 25px; text-transform: uppercase; font-family: sans-serif; }
+        .status { font-size: 0.8em; color: #888; margin-top: 15px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Huyền Vực</h1>
-        <p class="subtitle">Thiên mệnh hữu ý, khởi nguyên luân hồi</p>
-        
-        <div id="result">Kính mời khởi quay...</div>
-        
+        <div id="result">Kính mời khởi quay</div>
         <button id="spinBtn" class="main-btn" onclick="spin()">Khai Thiên Lập Địa</button>
-        
         <button class="reset-btn" onclick="resetList()">Làm mới căn cốt</button>
-        
-        <div class="status" id="count">Đang khởi tạo...</div>
+        <div class="status" id="count">Đang tải...</div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'HUYENVUC_ART_V1';
+        // Tên bộ nhớ hoàn toàn mới để tránh lỗi kẹt nút
+        const KEY = 'HUYENVUC_NEW_CLEAN_V1';
 
-        // DANH SÁCH ĐÃ LOẠI BỎ ICON
         const config = [
-            { name: "Thiên Giới: Hoàng tử hoặc Công chúa", qty: 5 },
-            { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
-            { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
-            { name: "Thần Thú: Thanh Long", qty: 1 },
-            { name: "Thần Thú: Huyền Vũ", qty: 1 },
-            { name: "Thần Thú: Chu Tước", qty: 1 },
-            { name: "Thần: Hỏa Thần", qty: 1 },
-            { name: "Thần: Thủy Thần", qty: 1 },
-            { name: "Nhân Giới: Hoàng Đế", qty: 1 },
-            { name: "Nhân Giới: Hoàng Hậu", qty: 1 },
-            { name: "Nhân Giới: Thái tử", qty: 1 },
-            { name: "Triều đình: Quốc Sư", qty: 1 },
-            { name: "Triều đình: Thừa Tướng", qty: 1 },
-            { name: "Ma Giới: Ma Thần", qty: 1 },
-            { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
-            { name: "Âm Giới: Bạch Vô thường", qty: 1 },
-            { name: "Tộc: Long tộc Long Sơn", qty: 1 },
-            { name: "Tộc: Hồ tộc Vạn Cốc Sơn", qty: 1 },
-            { name: "Làng Yên Hạ: Đại phu", qty: 2 },
-            { name: "Làng Giang Yết: Dân làng", qty: 10 }
+            { name: "Thần Thú Thanh Long", qty: 1 },
+            { name: "Thần Thú Huyền Vũ", qty: 1 },
+            { name: "Thần Thú Chu Tước", qty: 1 },
+            { name: "Hoàng Đế Trường Minh Quốc", qty: 1 },
+            { name: "Hoàng Hậu Trường Minh Quốc", qty: 1 },
+            { name: "Thái tử Trường Minh Quốc", qty: 1 },
+            { name: "Quốc Sư Triều Đình", qty: 1 },
+            { name: "Thừa Tướng Tướng Quốc", qty: 1 },
+            { name: "Ma Giới Ma Thần", qty: 1 },
+            { name: "Thập Nhị Tà Thần", qty: 12 },
+            { name: "Bạch Vô Thường", qty: 1 },
+            { name: "Long tộc Long Sơn", qty: 1 },
+            { name: "Hồ tộc Vạn Cốc Sơn", qty: 1 },
+            { name: "Làng Yên Hạ Đại Phu", qty: 2 },
+            { name: "Trưởng Làng Yên Hạ", qty: 1 }
         ];
 
-        function generateFullList() {
+        function getList() {
             let list = [];
-            config.forEach(item => {
-                for(let i=0; i<item.qty; i++) { list.push(item.name); }
-            });
+            config.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
             return list;
         }
 
-        let availableChars = JSON.parse(localStorage.getItem(STORAGE_KEY)) || generateFullList();
+        let chars = JSON.parse(localStorage.getItem(KEY)) || getList();
 
-        function updateUI() {
-            document.getElementById('count').innerText = `Hiện còn: ${availableChars.length} suất căn cốt`;
-            const btn = document.getElementById('spinBtn');
-            if (availableChars.length === 0) {
-                document.getElementById('result').innerText = "Thiên mệnh đã hoàn tất";
-                btn.disabled = true;
-            } else { btn.disabled = false; }
+        function update() {
+            document.getElementById('count').innerText = "Hiện còn: " + chars.length + " căn cốt";
+            document.getElementById('spinBtn').disabled = chars.length === 0;
+            if(chars.length === 0) document.getElementById('result').innerText = "Thiên mệnh đã định";
         }
 
         function spin() {
             const btn = document.getElementById('spinBtn');
             const res = document.getElementById('result');
             btn.disabled = true;
-
-            let i = 0;
+            let count = 0;
             const timer = setInterval(() => {
-                res.innerText = availableChars[Math.floor(Math.random() * availableChars.length)];
-                i++;
-                if (i > 25) {
+                res.innerText = chars[Math.floor(Math.random() * chars.length)];
+                if(++count > 20) {
                     clearInterval(timer);
-                    const idx = Math.floor(Math.random() * availableChars.length);
-                    const chosen = availableChars[idx];
-                    res.innerHTML = `Vận mệnh an bài:<br><span style="color:#2F2F4F; font-size:1.1em; text-transform:uppercase;">${chosen}</span>`;
-                    availableChars.splice(idx, 1);
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(availableChars));
-                    updateUI();
+                    const finalIdx = Math.floor(Math.random() * chars.length);
+                    const chosen = chars[finalIdx];
+                    res.innerHTML = "Vận mệnh an bài:<br><span style='text-transform:uppercase; color:#483D8B;'>" + chosen + "</span>";
+                    chars.splice(finalIdx, 1);
+                    localStorage.setItem(KEY, JSON.stringify(chars));
+                    update();
+                    btn.disabled = false;
                 }
             }, 60);
         }
 
         function resetList() {
-            if(confirm("Xác nhận khôi phục lại toàn bộ căn cốt ban đầu?")) {
-                availableChars = generateFullList();
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(availableChars));
-                document.getElementById('result').innerText = "Vòng xoay đã sẵn sàng";
-                updateUI();
+            if(confirm("Làm mới danh sách?")) {
+                chars = getList();
+                localStorage.setItem(KEY, JSON.stringify(chars));
+                document.getElementById('result').innerText = "Kính mời khởi quay";
+                update();
             }
         }
 
-        updateUI();
+        update();
     </script>
 </body>
 </html>
