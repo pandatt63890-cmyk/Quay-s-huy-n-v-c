@@ -4,66 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Huyền Vực - Định Mệnh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #D1D1FB; --dark: #4A4A8A; --bg: #F3F3FF; }
-        body { background: var(--bg); color: var(--dark); font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .container { text-align: center; border: 2px solid var(--primary); padding: 30px; border-radius: 25px; background: white; box-shadow: 0 10px 30px rgba(209,209,251,0.5); width: 100%; max-width: 450px; }
-        h1 { margin-bottom: 5px; letter-spacing: 2px; }
-        #result { font-size: 1.3em; min-height: 120px; margin: 20px 0; color: #5D5D9D; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600; border: 2px solid #F0F0FF; border-radius: 15px; padding: 15px; background: #FAFAFF; }
+        :root { --primary: #D1D1FB; --dark: #483D8B; --bg: #F8F8FF; }
         
-        /* Nút quay chính */
-        .main-btn { background: var(--primary); color: var(--dark); border: none; padding: 18px; font-size: 1.2em; cursor: pointer; border-radius: 50px; transition: 0.3s; width: 100%; font-weight: bold; box-shadow: 0 4px 15px rgba(209,209,251,0.4); margin-bottom: 15px; }
-        .main-btn:disabled { background: #E0E0E0; color: #999; cursor: not-allowed; }
-        
-        /* Nút Reset rõ ràng */
-        .reset-btn { background: #FFB3B3; color: #900; border: none; padding: 10px 20px; font-size: 0.9em; cursor: pointer; border-radius: 10px; font-weight: bold; width: 100%; transition: 0.2s; }
-        .reset-btn:hover { background: #FF8080; }
+        body { 
+            background: var(--bg); 
+            color: var(--dark); 
+            font-family: 'Playfair Display', serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px;
+            background-image: radial-gradient(circle, #ffffff, #E6E6FA);
+        }
 
-        .status { font-size: 0.85em; color: #8E8EBC; margin-top: 15px; font-weight: bold; }
+        .container { 
+            text-align: center; 
+            border: 1px solid rgba(72, 61, 139, 0.2); 
+            padding: 40px; 
+            border-radius: 30px; 
+            background: rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 20px 50px rgba(122, 122, 205, 0.15); 
+            width: 100%; 
+            max-width: 480px; 
+            backdrop-filter: blur(10px);
+        }
+
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-weight: 700; 
+            font-size: 2.2em;
+            margin-bottom: 5px; 
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        p.subtitle {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #8E8EBC;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        #result { 
+            font-size: 1.5em; 
+            min-height: 140px; 
+            margin: 25px 0; 
+            color: var(--dark); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            font-weight: 800; 
+            font-style: italic;
+            border-top: 1px double var(--primary);
+            border-bottom: 1px double var(--primary);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .main-btn { 
+            background: var(--dark); 
+            color: #fff; 
+            border: none; 
+            padding: 20px; 
+            font-size: 1.1em; 
+            font-family: 'Cinzel', serif;
+            cursor: pointer; 
+            border-radius: 5px; 
+            transition: 0.4s; 
+            width: 100%; 
+            font-weight: bold; 
+            letter-spacing: 3px;
+            box-shadow: 0 4px 15px rgba(72, 61, 139, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .main-btn:hover:not(:disabled) {
+            background: #2F2F4F;
+            letter-spacing: 5px;
+            transform: translateY(-3px);
+        }
+
+        .main-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
+        
+        .reset-btn { 
+            background: transparent; 
+            color: #aaa; 
+            border: 1px solid #ddd; 
+            padding: 8px 15px; 
+            font-size: 0.7em; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            font-family: sans-serif;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .reset-btn:hover { color: #f66; border-color: #f66; }
+
+        .status { font-size: 0.8em; color: #8E8EBC; margin-top: 20px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>HUYỀN VỰC</h1>
-        <p style="color: #A3A3D3; font-style: italic; font-size: 0.8em; margin-bottom: 20px;">— Vận mệnh nằm trong tay bạn —</p>
+        <h1>Huyền Vực</h1>
+        <p class="subtitle">Thiên mệnh hữu ý, khởi nguyên luân hồi</p>
         
-        <div id="result">Hệ thống đã sẵn sàng...</div>
+        <div id="result">Kính mời khởi quay...</div>
         
-        <button id="spinBtn" class="main-btn" onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
+        <button id="spinBtn" class="main-btn" onclick="spin()">Khai Thiên Lập Địa</button>
         
-        <button class="reset-btn" onclick="resetList()">LÀM MỚI TOÀN BỘ DANH SÁCH</button>
+        <button class="reset-btn" onclick="resetList()">Làm mới căn cốt</button>
         
-        <div class="status" id="count">Đang tải...</div>
+        <div class="status" id="count">Đang khởi tạo...</div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'HUYENVUC_FINAL_V4';
+        const STORAGE_KEY = 'HUYENVUC_ART_V1';
 
-        // DANH SÁCH CHI TIẾT SỐ LƯỢNG
+        // DANH SÁCH ĐÃ LOẠI BỎ ICON
         const config = [
-            { name: "👑 Nhân Giới: Hoàng Đế", qty: 1 },
-            { name: "💐 Nhân Giới: Hoàng Hậu", qty: 1 },
-            { name: "🌺 Nhân Giới: Hoàng Quý Phi", qty: 1 },
-            { name: "🌷 Nhân Giới: Quý Phi", qty: 2 },
-            { name: "🤴 Nhân Giới: Thái tử", qty: 1 },
-            { name: "📜 Triều đình: Thừa Tướng", qty: 1 },
-            { name: "⚔️ Triều đình: Nguyên Soái", qty: 1 },
-            { name: "🏰 Cung: Mama", qty: 2 },
-            { name: "🌿 Làng Yên Hạ: Đại phu", qty: 2 },
-            { name: "🌿 Làng Giang Yết: Đại phu", qty: 2 },
-            { name: "🌿 Làng Đoan Di: Đại phu", qty: 2 },
-            { name: "🧙‍♂️ Làng Yên Hạ: Trưởng lão", qty: 4 },
-            { name: "🧙‍♂️ Làng Giang Yết: Trưởng lão", qty: 4 },
-            { name: "🧙‍♂️ Làng Đoan Di: Trưởng lão", qty: 4 },
-            { name: "👺 Ma Giới: Thập Nhị Tà Thần", qty: 12 },
-            { name: "🐉 Thần Thú: Thanh Long", qty: 1 },
-            { name: "🐢 Thần Thú: Huyền Vũ", qty: 1 },
-            { name: "🦚 Thần Thú: Chu Tước", qty: 1 },
-            { name: "🌓 Âm Giới: Bạch Vô thường", qty: 1 },
-            { name: "🛡️ Tộc: Long tộc (Long Sơn)", qty: 1 },
-            { name: "🛡️ Tộc: Điểu tộc (Phi Phong Lĩnh)", qty: 1 },
-            { name: "🛡️ Tộc: Nhân ngư (Đông Hải)", qty: 1 },
-            { name: "🛡️ Tộc: Hồ ly (Động Bàn Uyển)", qty: 1 }
+            { name: "Thiên Giới: Hoàng tử hoặc Công chúa", qty: 5 },
+            { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
+            { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
+            { name: "Thần Thú: Thanh Long", qty: 1 },
+            { name: "Thần Thú: Huyền Vũ", qty: 1 },
+            { name: "Thần Thú: Chu Tước", qty: 1 },
+            { name: "Thần: Hỏa Thần", qty: 1 },
+            { name: "Thần: Thủy Thần", qty: 1 },
+            { name: "Nhân Giới: Hoàng Đế", qty: 1 },
+            { name: "Nhân Giới: Hoàng Hậu", qty: 1 },
+            { name: "Nhân Giới: Thái tử", qty: 1 },
+            { name: "Triều đình: Quốc Sư", qty: 1 },
+            { name: "Triều đình: Thừa Tướng", qty: 1 },
+            { name: "Ma Giới: Ma Thần", qty: 1 },
+            { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
+            { name: "Âm Giới: Bạch Vô thường", qty: 1 },
+            { name: "Tộc: Long tộc Long Sơn", qty: 1 },
+            { name: "Tộc: Hồ tộc Vạn Cốc Sơn", qty: 1 },
+            { name: "Làng Yên Hạ: Đại phu", qty: 2 },
+            { name: "Làng Giang Yết: Dân làng", qty: 10 }
         ];
 
         function generateFullList() {
@@ -77,10 +164,10 @@
         let availableChars = JSON.parse(localStorage.getItem(STORAGE_KEY)) || generateFullList();
 
         function updateUI() {
-            document.getElementById('count').innerText = `Còn lại: ${availableChars.length} suất căn cốt`;
+            document.getElementById('count').innerText = `Hiện còn: ${availableChars.length} suất căn cốt`;
             const btn = document.getElementById('spinBtn');
             if (availableChars.length === 0) {
-                document.getElementById('result').innerText = "VẠN VẬT ĐÃ ĐỊNH - HẾT SUẤT!";
+                document.getElementById('result').innerText = "Thiên mệnh đã hoàn tất";
                 btn.disabled = true;
             } else { btn.disabled = false; }
         }
@@ -98,4 +185,24 @@
                     clearInterval(timer);
                     const idx = Math.floor(Math.random() * availableChars.length);
                     const chosen = availableChars[idx];
-                    res.innerHTML = `Vận mệnh an bài:<br><span style="color:#7A7ACD; font-size:1.2em;">✨ ${chosen} ✨
+                    res.innerHTML = `Vận mệnh an bài:<br><span style="color:#2F2F4F; font-size:1.1em; text-transform:uppercase;">${chosen}</span>`;
+                    availableChars.splice(idx, 1);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(availableChars));
+                    updateUI();
+                }
+            }, 60);
+        }
+
+        function resetList() {
+            if(confirm("Xác nhận khôi phục lại toàn bộ căn cốt ban đầu?")) {
+                availableChars = generateFullList();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(availableChars));
+                document.getElementById('result').innerText = "Vòng xoay đã sẵn sàng";
+                updateUI();
+            }
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>
