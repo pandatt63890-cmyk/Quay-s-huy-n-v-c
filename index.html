@@ -143,21 +143,73 @@
         const STORAGE_KEY = 'HUYENVUC_RED_V1';
 
         const rawData = [
-            { name: "Hoàng Đế Trường Minh Quốc", qty: 1 },
-            { name: "Hoàng Hậu Trường Minh Quốc", qty: 1 },
-            { name: "Thái tử Trường Minh Quốc", qty: 1 },
-            { name: "Ma Thần Ma Giới", qty: 1 },
-            { name: "Thập Nhị Tà Thần", qty: 12 },
-            { name: "Thanh Long Thần Thú", qty: 1 },
-            { name: "Huyền Vũ Thần Thú", qty: 1 },
-            { name: "Chu Tước Thần Thú", qty: 1 },
-            { name: "Bạch Vô Thường", qty: 1 },
-            { name: "Quốc Sư", qty: 1 },
-            { name: "Thừa Tướng", qty: 1 },
-            { name: "Nguyên Soái", qty: 1 },
-            { name: "Đại phu Làng Yên Hạ", qty: 2 },
-            { name: "Đại phu Làng Giang Yết", qty: 2 },
-            { name: "Đại phu Làng Đoan Di", qty: 2 }
+const config = [
+    // THIÊN GIỚI
+    { name: "Thiên Giới: Hoàng tử/Công chúa (Ban cấp 9)", qty: 5 },
+    { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
+    { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
+    { name: "Thiên Giới: Thần Thú Huyền Vũ", qty: 1 },
+    { name: "Thiên Giới: Lôi Thần", qty: 1 },
+    { name: "Thiên Giới: Thập Nhị Tiên Cô", qty: 12 },
+    { name: "Thiên Giới: Tiểu thần (Tự phong nam)", qty: 5 },
+    { name: "Thiên Giới: Tiên tử (Tự phong nữ)", qty: 2 },
+    { name: "Thiên Giới: Quy tộc nhân (Ngọc Quy Trại)", qty: 5 },
+    { name: "Thiên Giới: Hùng tộc nhân (Hành Tôn Sơn)", qty: 5 },
+
+    // NHÂN GIỚI - HOÀNG TỘC TRƯỜNG MINH QUỐC
+    { name: "Nhân Giới: Hoàng Đế", qty: 1 },
+    { name: "Nhân Giới: Hoàng Hậu", qty: 1 },
+    { name: "Nhân Giới: Hoàng Quý Phi", qty: 1 },
+    { name: "Nhân Giới: Quý Phi", qty: 2 },
+    { name: "Nhân Giới: Phi (Hậu cung)", qty: 3 },
+    { name: "Nhân Giới: Thái tử", qty: 1 },
+    { name: "Nhân Giới: Thái tử phi", qty: 1 },
+    { name: "Nhân Giới: Công chúa/Hoàng tử", qty: 5 },
+
+    // NHÂN GIỚI - CHỨC VỤ CUNG ĐÌNH (Mỗi cung)
+    { name: "Cung đình: Tổng quản", qty: 1 },
+    { name: "Cung đình: Thái giám", qty: 5 },
+    { name: "Cung đình: Mama", qty: 2 },
+    { name: "Cung đình: Thái y", qty: 5 },
+    { name: "Cung đình: Ngự trù (Đầu bếp)", qty: 3 },
+
+    // NHÂN GIỚI - TRIỀU ĐÌNH & ĐỊA PHƯƠNG
+    { name: "Triều đình: Quốc Sư", qty: 1 },
+    { name: "Triều đình: Nguyên Soái", qty: 1 },
+    { name: "Triều đình: Quan Võ", qty: 3 },
+    { name: "Làng Yên Hạ: Trưởng làng", qty: 1 },
+    { name: "Làng Yên Hạ: Phu nhân", qty: 1 },
+    { name: "Làng Yên Hạ: Trưởng lão", qty: 4 },
+    { name: "Làng Yên Hạ: Đại phu", qty: 1 },
+    { name: "Làng Giang Yết: Trưởng làng", qty: 1 },
+    { name: "Làng Giang Yết: Phu nhân", qty: 1 },
+    { name: "Làng Giang Yết: Trưởng lão", qty: 4 },
+    { name: "Làng Giang Yết: Đại phu", qty: 2 },
+    { name: "Làng Đoan Di: Trưởng làng", qty: 1 },
+    { name: "Làng Đoan Di: Phu nhân", qty: 1 },
+    { name: "Làng Đoan Di: Trưởng lão", qty: 4 },
+    { name: "Làng Đoan Di: Đại phu", qty: 1 },
+
+    // MA GIỚI
+    { name: "Ma Giới: Hoàng tử/Công chúa", qty: 5 },
+    { name: "Ma Giới: Ma thần (Tự phong)", qty: 3 },
+    { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
+    { name: "Ma Giới: Ma thú Đào Ngột", qty: 1 },
+    { name: "Ma Giới: Tiểu ma quân", qty: 5 },
+    { name: "Ma Giới: Tiểu quỷ", qty: 10 },
+
+    // ÂM GIỚI
+    { name: "Âm Giới: Thập Đại Diêm La", qty: 10 },
+    { name: "Âm Giới: Ngưu đầu Mã diện", qty: 5 },
+
+    // YÊU GIỚI
+    { name: "Yêu Giới: Hoàng tử/Công chúa", qty: 5 },
+    { name: "Yêu Giới: Tộc Giao nhân (Bích Hải)", qty: 5 },
+    { name: "Yêu Giới: Tộc Miêu tinh (Liễu Ngọc Phong)", qty: 5 },
+    { name: "Yêu Giới: Tộc Xà tinh (Huyền Long Đàm)", qty: 5 },
+    { name: "Yêu Giới: Tộc Điêu tinh (Phi Long Thạch)", qty: 5 },
+    { name: "Yêu Giới: Tộc Hùng Tinh (Hổ Uy Sơn)", qty: 5 }
+];
         ];
 
         function createList() {
@@ -214,3 +266,4 @@
     </script>
 </body>
 </html>
+
