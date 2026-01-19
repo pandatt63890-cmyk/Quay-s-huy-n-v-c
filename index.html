@@ -3,267 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huyền Vực - Xích Ma Giới</title>
+    <title>Huyền Vực - Tuyển Nhân Đợt 2</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --main-red: #D32F2F; /* Đỏ hoàng gia */
-            --dark-red: #8B0000;
-            --gold: #FFD700;
-            --bg-black: #1A1A1A;
-        }
-
-        body { 
-            background: var(--bg-black); 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            padding: 20px;
-        }
-
-        .container { 
-            text-align: center; 
-            padding: 40px 25px; 
-            border-radius: 20px; 
-            background: #262626; 
-            border: 2px solid var(--main-red);
-            box-shadow: 0 0 30px rgba(211, 47, 47, 0.3); 
-            width: 100%; 
-            max-width: 400px; 
-        }
-
-        h1 { 
-            font-weight: 900; 
-            font-size: 2em; 
-            margin: 0; 
-            color: var(--main-red);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
-        }
-
-        .sub {
-            font-size: 0.75em;
-            color: var(--gold);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        #result-display { 
-            font-size: 1.5em; 
-            min-height: 120px; 
-            margin: 20px 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            font-weight: 700; 
-            background: rgba(211, 47, 47, 0.1);
-            border: 1px solid rgba(211, 47, 47, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            color: #ffffff;
-            line-height: 1.4;
-        }
-        
-        .spin-btn { 
-            background: var(--main-red); 
-            color: #fff; 
-            border: none; 
-            padding: 18px; 
-            font-size: 1.1em; 
-            font-weight: 800;
-            cursor: pointer; 
-            border-radius: 10px; 
-            transition: 0.3s; 
-            width: 100%; 
-            text-transform: uppercase;
-            box-shadow: 0 4px 0 var(--dark-red);
-        }
-
-        .spin-btn:hover:not(:disabled) {
-            background: #FF5252;
-            transform: translateY(-2px);
-        }
-
-        .spin-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        .spin-btn:disabled { 
-            background: #444; 
-            color: #888; 
-            box-shadow: none;
-            cursor: not-allowed; 
-        }
-        
-        .reset-btn { 
-            background: transparent; 
-            color: #666; 
-            border: none;
-            padding: 10px; 
-            font-size: 0.7em; 
-            cursor: pointer; 
-            margin-top: 25px;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-decoration: underline;
-        }
-
-        .status { 
-            font-size: 0.75em; 
-            color: #888; 
-            margin-top: 10px; 
-            font-weight: 600; 
-        }
+        :root { --red: #D32F2F; --gold: #FFD700; --bg: #121212; --card: #1E1E1E; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { text-align: center; padding: 30px; border-radius: 20px; background: var(--card); border: 2px solid var(--red); box-shadow: 0 0 30px rgba(211, 47, 47, 0.2); width: 100%; max-width: 450px; }
+        h1 { font-weight: 900; font-size: 1.8em; margin: 0; color: var(--red); letter-spacing: 2px; text-transform: uppercase; }
+        .sub { font-size: 0.7em; color: var(--gold); margin-bottom: 25px; font-weight: 700; letter-spacing: 1px; }
+        #result { font-size: 1.4em; min-height: 120px; margin: 20px 0; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; border: 1px solid rgba(211, 47, 47, 0.3); line-height: 1.4; }
+        .spin-btn { background: var(--red); color: white; border: none; padding: 18px; font-size: 1.1em; font-weight: 800; cursor: pointer; border-radius: 12px; width: 100%; text-transform: uppercase; transition: 0.3s; box-shadow: 0 4px 0 #8B0000; }
+        .spin-btn:hover:not(:disabled) { background: #FF5252; transform: translateY(-2px); }
+        .spin-btn:active { transform: translateY(2px); box-shadow: none; }
+        .spin-btn:disabled { background: #444; color: #888; box-shadow: none; cursor: not-allowed; }
+        .reset-btn { background: transparent; color: #666; border: none; padding: 10px; font-size: 0.7em; cursor: pointer; margin-top: 20px; text-decoration: underline; font-weight: 700; }
+        .status { font-size: 0.75em; color: #888; margin-top: 10px; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>HUYỀN VỰC</h1>
-        <div class="sub">XÍCH MA GIỚI - ĐỊNH MỆNH</div>
-        
-        <div id="result-display">NHẤN QUAY ĐỂ KHỞI ĐẦU</div>
-        
-        <button id="spinBtn" class="spin-btn" onclick="startSpin()">KHAI THIÊN LẬP ĐỊA</button>
-        
-        <div class="status" id="countDisplay">Đang triệu hồi...</div>
-        <button class="reset-btn" onclick="resetSystem()">KHÔI PHỤC DANH SÁCH</button>
+        <div class="sub">PHÁT TUYỂN ĐỢT 02 (1/2026)</div>
+        <div id="result">KÍNH MỜI KHỞI QUAY</div>
+        <button id="spinBtn" class="spin-btn" onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
+        <div class="status" id="count">Đang triệu hồi...</div>
+        <button class="reset-btn" onclick="resetData()">LÀM MỚI DANH SÁCH (100 CĂN CỐT)</button>
     </div>
 
     <script>
-        // Key mới để không bị kẹt bộ nhớ cũ
-        const STORAGE_KEY = 'HUYENVUC_RED_V1';
+        const STORAGE_KEY = 'HUYENVUC_DOT2_V1';
 
-        const rawData = [
-const config = [
-    // THIÊN GIỚI
-    { name: "Thiên Giới: Hoàng tử/Công chúa (Ban cấp 9)", qty: 5 },
-    { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
-    { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
-    { name: "Thiên Giới: Thần Thú Huyền Vũ", qty: 1 },
-    { name: "Thiên Giới: Lôi Thần", qty: 1 },
-    { name: "Thiên Giới: Thập Nhị Tiên Cô", qty: 12 },
-    { name: "Thiên Giới: Tiểu thần (Tự phong nam)", qty: 5 },
-    { name: "Thiên Giới: Tiên tử (Tự phong nữ)", qty: 2 },
-    { name: "Thiên Giới: Quy tộc nhân (Ngọc Quy Trại)", qty: 5 },
-    { name: "Thiên Giới: Hùng tộc nhân (Hành Tôn Sơn)", qty: 5 },
-
-    // NHÂN GIỚI - HOÀNG TỘC TRƯỜNG MINH QUỐC
-    { name: "Nhân Giới: Hoàng Đế", qty: 1 },
-    { name: "Nhân Giới: Hoàng Hậu", qty: 1 },
-    { name: "Nhân Giới: Hoàng Quý Phi", qty: 1 },
-    { name: "Nhân Giới: Quý Phi", qty: 2 },
-    { name: "Nhân Giới: Phi (Hậu cung)", qty: 3 },
-    { name: "Nhân Giới: Thái tử", qty: 1 },
-    { name: "Nhân Giới: Thái tử phi", qty: 1 },
-    { name: "Nhân Giới: Công chúa/Hoàng tử", qty: 5 },
-
-    // NHÂN GIỚI - CHỨC VỤ CUNG ĐÌNH (Mỗi cung)
-    { name: "Cung đình: Tổng quản", qty: 1 },
-    { name: "Cung đình: Thái giám", qty: 5 },
-    { name: "Cung đình: Mama", qty: 2 },
-    { name: "Cung đình: Thái y", qty: 5 },
-    { name: "Cung đình: Ngự trù (Đầu bếp)", qty: 3 },
-
-    // NHÂN GIỚI - TRIỀU ĐÌNH & ĐỊA PHƯƠNG
-    { name: "Triều đình: Quốc Sư", qty: 1 },
-    { name: "Triều đình: Nguyên Soái", qty: 1 },
-    { name: "Triều đình: Quan Võ", qty: 3 },
-    { name: "Làng Yên Hạ: Trưởng làng", qty: 1 },
-    { name: "Làng Yên Hạ: Phu nhân", qty: 1 },
-    { name: "Làng Yên Hạ: Trưởng lão", qty: 4 },
-    { name: "Làng Yên Hạ: Đại phu", qty: 1 },
-    { name: "Làng Giang Yết: Trưởng làng", qty: 1 },
-    { name: "Làng Giang Yết: Phu nhân", qty: 1 },
-    { name: "Làng Giang Yết: Trưởng lão", qty: 4 },
-    { name: "Làng Giang Yết: Đại phu", qty: 2 },
-    { name: "Làng Đoan Di: Trưởng làng", qty: 1 },
-    { name: "Làng Đoan Di: Phu nhân", qty: 1 },
-    { name: "Làng Đoan Di: Trưởng lão", qty: 4 },
-    { name: "Làng Đoan Di: Đại phu", qty: 1 },
-
-    // MA GIỚI
-    { name: "Ma Giới: Hoàng tử/Công chúa", qty: 5 },
-    { name: "Ma Giới: Ma thần (Tự phong)", qty: 3 },
-    { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
-    { name: "Ma Giới: Ma thú Đào Ngột", qty: 1 },
-    { name: "Ma Giới: Tiểu ma quân", qty: 5 },
-    { name: "Ma Giới: Tiểu quỷ", qty: 10 },
-
-    // ÂM GIỚI
-    { name: "Âm Giới: Thập Đại Diêm La", qty: 10 },
-    { name: "Âm Giới: Ngưu đầu Mã diện", qty: 5 },
-
-    // YÊU GIỚI
-    { name: "Yêu Giới: Hoàng tử/Công chúa", qty: 5 },
-    { name: "Yêu Giới: Tộc Giao nhân (Bích Hải)", qty: 5 },
-    { name: "Yêu Giới: Tộc Miêu tinh (Liễu Ngọc Phong)", qty: 5 },
-    { name: "Yêu Giới: Tộc Xà tinh (Huyền Long Đàm)", qty: 5 },
-    { name: "Yêu Giới: Tộc Điêu tinh (Phi Long Thạch)", qty: 5 },
-    { name: "Yêu Giới: Tộc Hùng Tinh (Hổ Uy Sơn)", qty: 5 }
-];
+        const config = [
+            // THIÊN GIỚI
+            { name: "Thiên Giới: Hoàng tử/Công chúa", qty: 5 },
+            { name: "Thiên Giới: Đông Thiên Vương", qty: 1 },
+            { name: "Thiên Giới: Tây Thiên Vương", qty: 1 },
+            { name: "Thiên Giới: Thần Thú Huyền Vũ", qty: 1 },
+            { name: "Thiên Giới: Lôi Thần", qty: 1 },
+            { name: "Thiên Giới: Thập Nhị Tiên Cô", qty: 12 },
+            { name: "Thiên Giới: Tiểu thần", qty: 5 },
+            { name: "Thiên Giới: Tiên tử", qty: 2 },
+            { name: "Thiên Giới: Quy tộc (Ngọc Quy Trại)", qty: 5 },
+            { name: "Thiên Giới: Hùng tộc (Hành Tôn Sơn)", qty: 5 },
+            // NHÂN GIỚI
+            { name: "Trường Minh Quốc: Hoàng Đế", qty: 1 },
+            { name: "Trường Minh Quốc: Hoàng Hậu", qty: 1 },
+            { name: "Trường Minh Quốc: Hoàng Quý Phi", qty: 1 },
+            { name: "Trường Minh Quốc: Quý Phi", qty: 2 },
+            { name: "Trường Minh Quốc: Thái tử", qty: 1 },
+            { name: "Trường Minh Quốc: Thái tử phi", qty: 1 },
+            { name: "Cung đình: Tổng quản", qty: 1 },
+            { name: "Cung đình: Mama", qty: 2 },
+            { name: "Cung đình: Thái y", qty: 5 },
+            { name: "Triều đình: Quốc Sư", qty: 1 },
+            { name: "Triều đình: Nguyên Soái", qty: 1 },
+            { name: "Làng Yên Hạ: Trưởng làng", qty: 1 },
+            { name: "Làng Yên Hạ: Phu nhân", qty: 1 },
+            { name: "Làng Yên Hạ: Trưởng lão", qty: 4 },
+            { name: "Làng Yên Hạ: Đại phu", qty: 1 },
+            { name: "Làng Giang Yết: Trưởng làng", qty: 1 },
+            { name: "Làng Giang Yết: Phu nhân", qty: 1 },
+            { name: "Làng Giang Yết: Trưởng lão", qty: 4 },
+            { name: "Làng Giang Yết: Đại phu", qty: 2 },
+            { name: "Làng Đoan Di: Trưởng làng", qty: 1 },
+            { name: "Làng Đoan Di: Phu nhân", qty: 1 },
+            { name: "Làng Đoan Di: Trưởng lão", qty: 4 },
+            { name: "Làng Đoan Di: Đại phu", qty: 1 },
+            // MA GIỚI
+            { name: "Ma Giới: Hoàng tử/Công chúa", qty: 5 },
+            { name: "Ma Giới: Ma thần", qty: 1 },
+            { name: "Ma Giới: Thập Nhị Tà Thần", qty: 12 },
+            { name: "Ma Giới: Ma thú Đào Ngột", qty: 1 },
+            { name: "Ma Giới: Tiểu ma quân", qty: 4 },
+            { name: "Ma Giới: Tiểu quỷ", qty: 5 },
+            // ÂM GIỚI & YÊU GIỚI
+            { name: "Âm Giới: Thập Đại Diêm La", qty: 10 },
+            { name: "Âm Giới: Ngưu đầu Mã diện", qty: 5 },
+            { name: "Yêu Giới: Hoàng tử/Công chúa", qty: 5 },
+            { name: "Yêu Giới: Tộc Giao nhân", qty: 1 },
+            { name: "Yêu Giới: Tộc Miêu tinh", qty: 1 },
+            { name: "Yêu Giới: Tộc Xà tinh", qty: 1 },
+            { name: "Yêu Giới: Tộc Điêu tinh", qty: 1 },
+            { name: "Yêu Giới: Tộc Hùng Tinh", qty: 1 }
         ];
 
         function createList() {
             let list = [];
-            rawData.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
+            config.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
             return list;
         }
 
         let chars = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createList();
 
-        function refreshUI() {
-            document.getElementById('countDisplay').innerText = "CĂN CỐT CÒN LẠI: " + chars.length;
-            const b = document.getElementById('spinBtn');
-            if(chars.length === 0) {
-                document.getElementById('result-display').innerText = "VẠN VẬT ĐÃ AN BÀI";
-                b.disabled = true;
-            } else { b.disabled = false; }
+        function updateUI() {
+            document.getElementById('count').innerText = "CÒN LẠI: " + chars.length + " SUẤT";
+            document.getElementById('spinBtn').disabled = chars.length === 0;
+            if(chars.length === 0) document.getElementById('result').innerText = "HẾT NHÂN VẬT";
         }
 
-        function startSpin() {
+        function spin() {
             const btn = document.getElementById('spinBtn');
-            const display = document.getElementById('result-display');
+            const res = document.getElementById('result');
             btn.disabled = true;
-            
             let i = 0;
             const timer = setInterval(() => {
-                display.innerText = chars[Math.floor(Math.random() * chars.length)];
-                i++;
-                if(i > 20) {
+                res.innerText = chars[Math.floor(Math.random() * chars.length)];
+                if(++i > 20) {
                     clearInterval(timer);
                     const idx = Math.floor(Math.random() * chars.length);
                     const winner = chars[idx];
-                    
-                    display.innerHTML = "<span style='color:var(--gold); font-size:0.7em; display:block; margin-bottom:5px;'>KẾT QUẢ TRIỆU HỒI</span>" + winner;
-                    
+                    res.innerHTML = `<span style="color:var(--gold); font-size:0.6em; display:block;">KẾT QUẢ</span>${winner}`;
                     chars.splice(idx, 1);
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
-                    refreshUI();
+                    updateUI();
                     btn.disabled = false;
                 }
             }, 60);
         }
 
-        function resetSystem() {
-            if(confirm("Làm mới lại toàn bộ danh sách?")) {
+        function resetData() {
+            if(confirm("Làm mới danh sách 100 căn cốt?")) {
                 chars = createList();
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(chars));
-                document.getElementById('result-display').innerText = "NHẤN QUAY ĐỂ KHỞI ĐẦU";
-                refreshUI();
+                document.getElementById('result').innerText = "KÍNH MỜI KHỞI QUAY";
+                updateUI();
             }
         }
-
-        refreshUI();
+        updateUI();
     </script>
 </body>
 </html>
-
