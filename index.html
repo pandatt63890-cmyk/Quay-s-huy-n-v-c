@@ -4,62 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Huyền Vực - Thiên Mệnh</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,900&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #D1D1FB; --dark: #301934; --bg: #FDFBFF; }
-        body { background: var(--bg); color: var(--dark); font-family: 'Playfair Display', serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .container { text-align: center; border: 1px solid rgba(48, 25, 52, 0.1); padding: 40px; border-radius: 20px; background: #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.05); width: 100%; max-width: 450px; }
-        h1 { font-family: 'Cinzel', serif; font-size: 2.2em; margin-bottom: 5px; letter-spacing: 4px; }
-        #result { font-size: 1.4em; min-height: 120px; margin: 25px 0; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 900; font-style: italic; border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); padding: 15px; }
-        .main-btn { background: var(--dark); color: #fff; border: none; padding: 18px; font-size: 1.1em; font-family: 'Cinzel', serif; cursor: pointer; border-radius: 4px; transition: 0.3s; width: 100%; letter-spacing: 2px; }
-        .main-btn:disabled { background: #ccc; cursor: not-allowed; }
-        .reset-btn { background: transparent; color: #cc0000; border: 1px solid #ffcccc; padding: 8px 15px; font-size: 0.7em; cursor: pointer; border-radius: 4px; margin-top: 25px; text-transform: uppercase; font-family: sans-serif; }
-        .status { font-size: 0.8em; color: #888; margin-top: 15px; }
+        :root { --primary: #D1D1FB; --dark: #4A4A8A; --text: #2D2D44; }
+        
+        body { 
+            background: #F3F3FF; 
+            color: var(--text); 
+            font-family: 'Montserrat', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px;
+        }
+
+        .container { 
+            text-align: center; 
+            padding: 40px; 
+            border-radius: 24px; 
+            background: #ffffff; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05); 
+            width: 100%; 
+            max-width: 420px; 
+        }
+
+        h1 { 
+            font-weight: 800; 
+            font-size: 1.8em; 
+            letter-spacing: 2px; 
+            margin: 0; 
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.8em;
+            color: #A3A3D3;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        #result { 
+            font-size: 1.4em; 
+            min-height: 100px; 
+            margin: 20px 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            font-weight: 600; 
+            background: #F9F9FF;
+            border-radius: 16px;
+            padding: 20px;
+            color: #5D5D9D;
+            line-height: 1.5;
+        }
+        
+        .main-btn { 
+            background: var(--dark); 
+            color: #fff; 
+            border: none; 
+            padding: 18px; 
+            font-size: 1em; 
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer; 
+            border-radius: 12px; 
+            transition: all 0.3s ease; 
+            width: 100%; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .main-btn:hover:not(:disabled) {
+            background: #3A3A6A;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 74, 138, 0.3);
+        }
+
+        .main-btn:disabled { background: #E0E0E0; color: #999; cursor: not-allowed; }
+        
+        .reset-btn { 
+            background: transparent; 
+            color: #FF7070; 
+            border: none;
+            padding: 10px; 
+            font-size: 0.75em; 
+            cursor: pointer; 
+            margin-top: 20px;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .status { font-size: 0.75em; color: #B0B0D0; margin-top: 10px; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Huyền Vực</h1>
-        <div id="result">Kính mời khởi quay</div>
-        <button id="spinBtn" class="main-btn" onclick="spin()">Khai Thiên Lập Địa</button>
-        <button class="reset-btn" onclick="resetList()">Làm mới căn cốt</button>
+        <div class="subtitle">THIÊN MỆNH LUÂN HỒI</div>
+        
+        <div id="result">Hệ thống đã sẵn sàng</div>
+        
+        <button id="spinBtn" class="main-btn" onclick="spin()">QUAY NGAY</button>
+        
+        <button class="reset-btn" onclick="resetList()">Làm mới danh sách</button>
+        
         <div class="status" id="count">Đang tải...</div>
     </div>
 
     <script>
-        // Tên bộ nhớ hoàn toàn mới để tránh lỗi kẹt nút
-        const KEY = 'HUYENVUC_NEW_CLEAN_V1';
+        // Sử dụng Key mới hoàn toàn để kích hoạt nút quay ngay lập tức
+        const KEY = 'HUYENVUC_MODERN_V1';
 
         const config = [
-            { name: "Thần Thú Thanh Long", qty: 1 },
-            { name: "Thần Thú Huyền Vũ", qty: 1 },
-            { name: "Thần Thú Chu Tước", qty: 1 },
             { name: "Hoàng Đế Trường Minh Quốc", qty: 1 },
             { name: "Hoàng Hậu Trường Minh Quốc", qty: 1 },
-            { name: "Thái tử Trường Minh Quốc", qty: 1 },
-            { name: "Quốc Sư Triều Đình", qty: 1 },
-            { name: "Thừa Tướng Tướng Quốc", qty: 1 },
-            { name: "Ma Giới Ma Thần", qty: 1 },
+            { name: "Hoàng Quý Phi", qty: 1 },
+            { name: "Quý Phi", qty: 2 },
+            { name: "Thái tử", qty: 1 },
+            { name: "Quốc Sư", qty: 1 },
+            { name: "Thừa Tướng", qty: 1 },
+            { name: "Nguyên Soái", qty: 1 },
+            { name: "Thanh Long", qty: 1 },
+            { name: "Huyền Vũ", qty: 1 },
+            { name: "Chu Tước", qty: 1 },
+            { name: "Ma Thần", qty: 1 },
             { name: "Thập Nhị Tà Thần", qty: 12 },
             { name: "Bạch Vô Thường", qty: 1 },
+            { name: "Đông Thiên Vương", qty: 1 },
+            { name: "Tây Thiên Vương", qty: 1 },
             { name: "Long tộc Long Sơn", qty: 1 },
             { name: "Hồ tộc Vạn Cốc Sơn", qty: 1 },
-            { name: "Làng Yên Hạ Đại Phu", qty: 2 },
-            { name: "Trưởng Làng Yên Hạ", qty: 1 }
+            { name: "Đại phu Làng Yên Hạ", qty: 2 },
+            { name: "Đại phu Làng Giang Yết", qty: 2 },
+            { name: "Đại phu Làng Đoan Di", qty: 2 }
         ];
 
-        function getList() {
+        function getFullList() {
             let list = [];
             config.forEach(i => { for(let n=0; n<i.qty; n++) list.push(i.name); });
             return list;
         }
 
-        let chars = JSON.parse(localStorage.getItem(KEY)) || getList();
+        let chars = JSON.parse(localStorage.getItem(KEY)) || getFullList();
 
-        function update() {
-            document.getElementById('count').innerText = "Hiện còn: " + chars.length + " căn cốt";
-            document.getElementById('spinBtn').disabled = chars.length === 0;
-            if(chars.length === 0) document.getElementById('result').innerText = "Thiên mệnh đã định";
+        function updateUI() {
+            document.getElementById('count').innerText = "CÒN LẠI: " + chars.length + " SUẤT";
+            const btn = document.getElementById('spinBtn');
+            if (chars.length === 0) {
+                document.getElementById('result').innerText = "ĐÃ HẾT LƯỢT QUAY";
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+            }
         }
 
         function spin() {
@@ -73,25 +174,24 @@
                     clearInterval(timer);
                     const finalIdx = Math.floor(Math.random() * chars.length);
                     const chosen = chars[finalIdx];
-                    res.innerHTML = "Vận mệnh an bài:<br><span style='text-transform:uppercase; color:#483D8B;'>" + chosen + "</span>";
+                    res.innerHTML = "<span style='color:#A3A3D3; font-size:0.7em; margin-bottom:5px; display:block;'>KẾT QUẢ</span>" + chosen;
                     chars.splice(finalIdx, 1);
                     localStorage.setItem(KEY, JSON.stringify(chars));
-                    update();
-                    btn.disabled = false;
+                    updateUI();
                 }
             }, 60);
         }
 
         function resetList() {
-            if(confirm("Làm mới danh sách?")) {
-                chars = getList();
+            if(confirm("Làm mới lại toàn bộ danh sách?")) {
+                chars = getFullList();
                 localStorage.setItem(KEY, JSON.stringify(chars));
-                document.getElementById('result').innerText = "Kính mời khởi quay";
-                update();
+                document.getElementById('result').innerText = "Hệ thống đã sẵn sàng";
+                updateUI();
             }
         }
 
-        update();
+        updateUI();
     </script>
 </body>
 </html>
