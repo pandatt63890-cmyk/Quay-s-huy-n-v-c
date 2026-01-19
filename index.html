@@ -6,7 +6,7 @@
     <title>Huyền Vực - Vòng Quay Định Mệnh</title>
     <style>
         :root {
-            --primary-purple: #D1D1FB; /* Tím pastel nhẹ */
+            --primary-purple: #D1D1FB; 
             --dark-purple: #4A4A8A;
             --bg-color: #F3F3FF;
         }
@@ -90,10 +90,18 @@
     </div>
 
     <script>
+        // DANH SÁCH NHÂN VẬT TỔNG HỢP THEO YÊU CẦU
         const originalChars = [
             "✨ Thiên Giới: Hoàng tử/Công chúa", "✨ Thiên Giới: Đông Thiên Vương ‼", "✨ Thiên Giới: Tây Thiên Vương ‼",
             "🐉 Thần Thú: Thanh Long", "🐢 Thần Thú: Huyền Vũ", "🦚 Thần Thú: Chu Tước",
-            "🔥 Thần: Hỏa Thần", "💧 Thần: Thủy Thần", "⚡ Thần: Lôi Thần", "⛰️ Thần: Địa Thần",
-            "🍑 Tiên: Thập Nhị Tiên Cô", "🧒 Tiên: Tiểu Thần", "👩 Tiên: Tiên Tử",
+            "🔥 Thần: Hỏa Thần", "💧 Thần: Thủy Thần", "⚡ Thần: Lôi Thần", "⛰️ Thần: Địa Thần", "🌀 Thần: Thần Nguyên Tố Khác",
+            "🍑 Tiên: Thập Nhị Tiên Cô", "🧒 Tiên: Tiểu Thần", "🧚 Tiên: Tiên Tử",
             "🛡️ Tộc: Long tộc (Long Sơn)", "🛡️ Tộc: Hồ tộc (Vạn Cốc Sơn)", "🛡️ Tộc: Điểu tộc (Phi Phong Lĩnh)", "🛡️ Tộc: Quy tộc", "🛡️ Tộc: Hùng tộc",
-            "👑 Nhân Giới: Hoàng Đế ‼", "💐 Nhân Giới: Hoàng Hậu ‼", "🌺 Nhân Giới: Hoàng Quý Phi ‼",
+            "👑 Nhân Giới: Hoàng Đế ‼", "💐 Nhân Giới: Hoàng Hậu ‼", "🌺 Nhân Giới: Hoàng Quý Phi ‼", "🌷 Nhân Giới: Quý Phi ‼", "🏵️ Nhân Giới: Phi ‼",
+            "👑 Nhân Giới: Thái tử ‼", "🏵️ Nhân Giới: Thái tử phi ‼", "🤴 Nhân Giới: Hoàng tử/Công chúa",
+            "🏯 Cung: Công công", "🏯 Cung: Tổng quản", "🏯 Cung: Thái y", "🏯 Cung: Ngự trù", "🏯 Cung: Thái giám", "🏯 Cung: Mama",
+            "📜 Triều đình: Quốc Sư", "📜 Triều đình: Thừa Tướng", "⚔️ Triều đình: Nguyên Soái", "🖋️ Triều đình: Quan Văn", "🏹 Triều đình: Quan Võ",
+            "☘️ Làng Yên Hạ: Trưởng làng", "☘️ Làng Yên Hạ: Đại phu", "☘️ Làng Yên Hạ: Trưởng lão", "☘️ Làng Yên Hạ: Dân làng",
+            "🍊 Làng Giang Yết: Trưởng làng", "🍊 Làng Giang Yết: Dân làng", "🍊 Làng Giang Yết: Trưởng lão", "🍊 Làng Giang Yết: Đại phu",
+            "❄️ Làng Đoan Di: Trưởng làng", "❄️ Làng Đoan Di: Đại phu", "❄️ Làng Đoan Di: Trưởng lão", "❄️ Làng Đoan Di: Dân làng",
+            "🦊 Yêu Giới: Hoàng tử/Công chúa", "🧜 Yêu Giới: Nhân ngư", "🐉 Yêu Giới: Giao nhân", "🦊 Yêu Giới: Hồ ly
