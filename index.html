@@ -3,87 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huyền Vực - Hắc Thái Dương Kỷ</title>
+    <title>Huyền Vực - Vòng Quay Định Mệnh</title>
     <style>
-        body {
-            background-color: #000;
-            color: #ff3300;
-            font-family: 'Times New Roman', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-image: radial-gradient(circle, #330000, #000);
-            overflow: hidden;
-        }
-        .container {
-            text-align: center;
-            border: 2px solid #ff3300;
-            padding: 40px;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 30px #ff3300;
-            max-width: 90%;
-        }
-        h1 { font-size: 2.2em; text-transform: uppercase; letter-spacing: 5px; text-shadow: 2px 2px #550000; }
-        #result {
-            font-size: 1.6em;
-            height: 80px;
-            margin: 20px 0;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        button {
-            background: #ff3300;
-            color: #fff;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 50px;
-            box-shadow: 0 0 15px #ff3300;
-            transition: 0.3s;
-        }
-        button:hover { transform: scale(1.1); background: #fff; color: #ff3300; }
+        body { background-color: #000; color: #ff3300; font-family: 'Times New Roman', serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-image: radial-gradient(circle, #330000, #000); padding: 20px; }
+        .container { text-align: center; border: 2px solid #ff3300; padding: 30px; border-radius: 20px; background: rgba(0, 0, 0, 0.9); box-shadow: 0 0 30px #ff3300; width: 100%; max-width: 500px; }
+        h1 { font-size: 1.8em; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        #result { font-size: 1.4em; min-height: 120px; margin: 20px 0; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: bold; line-height: 1.4; border: 1px dashed #550000; border-radius: 10px; padding: 10px; }
+        button { background: #ff3300; color: #fff; border: none; padding: 15px 30px; font-size: 1.1em; cursor: pointer; border-radius: 50px; transition: 0.3s; margin: 10px 0; font-weight: bold; width: 100%; }
+        button:disabled { background: #444; cursor: not-allowed; box-shadow: none; }
+        button:hover:not(:disabled) { transform: scale(1.05); background: #fff; color: #ff3300; }
+        .status { font-size: 0.9em; color: #aaa; margin-top: 10px; }
+        .reset-btn { background: #222; font-size: 0.8em; padding: 8px; border: 1px solid #444; margin-top: 20px; width: auto; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>HẮC THÁI DƯƠNG</h1>
-        <p>— Quay bánh xe định mệnh chọn căn cốt —</p>
-        <div id="result">Vận mệnh đang chờ...</div>
-        <button onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
+        <p style="color: #888; font-style: italic; font-size: 0.9em;">— Vòng quay tự động loại bỏ nhân vật —</p>
+        
+        <div id="result">Huyền Vực đang chờ chủ nhân mới...</div>
+        
+        <button id="spinBtn" onclick="spin()">KHAI THIÊN LẬP ĐỊA</button>
+        
+        <div class="status" id="count">Đang tải danh sách...</div>
+        <button class="reset-btn" onclick="resetList()">LÀM MỚI TOÀN BỘ DANH SÁCH</button>
     </div>
 
     <script>
-        const characters = [
-            "☀️ Thiên Giới - Thần Thú Hộ Pháp", "☀️ Thiên Giới - Ngũ Hành Thượng Thần",
-            "🌾 Nhân Giới - Hoàng Tộc Trường Minh", "🌾 Nhân Giới - Quốc Sư/Thừa Tướng",
-            "😈 Ma Giới - Tà Thần Ma Cung", "😈 Ma Giới - Tứ Đại Ma Thú",
-            "⚖️ Âm Giới - Thập Đại Diêm La", "⚖️ Âm Giới - Hắc Bạch Vô Thường",
-            "🦊 Yêu Giới - Hồ Ly Tộc Động Bàn Uyển", "🦊 Yêu Giới - Giao Nhân Bích Hải"
+        // DANH SÁCH NHÂN VẬT TỔNG HỢP
+        const originalChars = [
+            "✨ Thiên Giới: Hoàng tử/Công chúa (Thứ tự)", "✨ Thiên Giới: Đông Thiên Vương ‼", "✨ Thiên Giới: Tây Thiên Vương ‼",
+            "✨ Thần Thú: Thanh Long", "✨ Thần Thú: Huyền Vũ", "✨ Thần Thú: Chu Tước",
+            "✨ Thần: Hỏa Thần", "✨ Thần: Thủy Thần", "✨ Thần: Lôi Thần", "✨ Thần: Địa Thần", "✨ Thần: Thần Nguyên Tố Khác",
+            "✨ Tiên: Thập Nhị Tiên Cô", "✨ Tiên: Tiểu Thần", "✨ Tiên: Tiên Tử",
+            "✨ Tộc: Long tộc (Long Sơn)", "✨ Tộc: Hồ tộc (Vạn Cốc Sơn)", "✨ Tộc: Điểu tộc (Phi Phong Lĩnh)", "✨ Tộc: Quy tộc (Ngọc Quy Trại)", "✨ Tộc: Hùng tộc (Hành Tôn Sơn)",
+            "🌾 Nhân Giới: Hoàng Đế ‼", "🌾 Nhân Giới: Hoàng Hậu ‼", "🌾 Nhân Giới: Hoàng Quý Phi ‼", "🌾 Nhân Giới: Quý Phi ‼", "🌾 Nhân Giới: Phi ‼",
+            "🌾 Nhân Giới: Thái tử ‼", "🌾 Nhân Giới: Thái tử phi ‼", "🌾 Nhân Giới: Công chúa/Hoàng tử (Thứ tự)",
+            "🏰 Cung: Công công", "🏰 Cung: Tổng quản", "🏰 Cung: Thái giám", "🏰 Cung: Mama", "🏰 Cung: Thái y", "🏰 Cung: Ngự trù",
+            "📜 Triều đình: Quốc Sư", "📜 Triều đình: Nguyên Soái", "📜 Triều đình: Quan Văn", "📜 Triều đình: Quan Võ",
+            "☘️ Làng Yên Hạ: Trưởng làng", "☘️ Làng Yên Hạ: Phu nhân", "☘️ Làng Yên Hạ: Trưởng lão", "☘️ Làng Yên Hạ: Dân làng", "☘️ Làng Yên Hạ: Đại phu",
+            "🍊 Làng Giang Yết: Trưởng làng", "🍊 Làng Giang Yết: Phu nhân", "🍊 Làng Giang Yết: Trưởng lão", "🍊 Làng Giang Yết: Dân làng", "🍊 Làng Giang Yết: Đại phu",
+            "❄️ Làng Đoan Di: Trưởng làng", "❄️ Làng Đoan Di: Phu nhân", "❄️ Làng Đoan Di: Trưởng lão", "❄️ Làng Đoan Di: Dân làng", "❄️ Làng Đoan Di: Đại phu",
+            "🦊 Yêu Giới: Hoàng tử/Công chúa (Thứ tự)", "🦊 Tộc: Nhân ngư (Đông Hải)", "🦊 Tộc: Giao nhân (Bích Hải Trường)", "🦊 Tộc: Hồ ly (Động Bàn Uyển)", "🦊 Tộc: Miêu tinh (Liễu Ngọc Phong)", "🦊 Tộc: Xà tinh (Huyền Long Đàm)", "🦊 Tộc: Điêu tinh (Phi Long Thạch)", "🦊 Tộc: Hùng Tinh (Hổ Uy Sơn)",
+            "😈 Ma Giới: Hoàng tử/Công chúa", "😈 Ma Giới: Ma Thần", "😈 Ma Giới: Thập Nhị Tà Thần", "😈 Ma Thú: Hỗn Độn", "😈 Ma Thú: Thao Thiết",
+            "😈 Ma Giới: Tiểu ma quân", "😈 Ma Giới: Tiểu quỷ",
+            "⚖️ Âm Giới: Thập Đại Diêm La", "⚖️ Âm Giới: Bạch Vô thường", "⚖️ Âm Giới: Ngưu đầu Mã diện"
         ];
 
+        let availableChars = JSON.parse(localStorage.getItem('huyenVucFinalList')) || [...originalChars];
+
+        function updateStatus() {
+            document.getElementById('count').innerText = `Còn lại: ${availableChars.length} nhân vật chưa chọn`;
+            if (availableChars.length === 0) {
+                document.getElementById('result').innerText = "VẬN MỆNH ĐÃ AN BÀI - HẾT NHÂN VẬT!";
+                document.getElementById('spinBtn').disabled = true;
+            }
+        }
+
         function spin() {
-            const btn = document.querySelector('button');
+            const btn = document.getElementById('spinBtn');
             const res = document.getElementById('result');
+            
             btn.disabled = true;
             let i = 0;
             const timer = setInterval(() => {
-                res.innerText = characters[Math.floor(Math.random() * characters.length)];
+                res.innerText = availableChars[Math.floor(Math.random() * availableChars.length)];
                 i++;
                 if (i > 25) {
                     clearInterval(timer);
+                    const finalIndex = Math.floor(Math.random() * availableChars.length);
+                    const finalChar = availableChars[finalIndex];
+                    
+                    res.innerHTML = `Vận mệnh gọi tên:<br><span style="color:#ffcc00; font-size: 1.2em;">✦ ${finalChar} ✦</span>`;
+                    
+                    availableChars.splice(finalIndex, 1);
+                    localStorage.setItem('huyenVucFinalList', JSON.stringify(availableChars));
+                    
                     btn.disabled = false;
-                    res.innerHTML = `<b style="color:#ffcc00; font-size: 1.2em;">✦ ${res.innerText} ✦</b>`;
+                    updateStatus();
                 }
-            }, 60);
+            }, 50);
         }
+
+        function resetList() {
+            if(confirm("Bạn có chắc chắn muốn khôi phục lại toàn bộ 100% danh sách nhân vật ban đầu?")) {
+                availableChars = [...originalChars];
+                localStorage.setItem('huyenVucFinalList', JSON.stringify(availableChars));
+                document.getElementById('spinBtn').disabled = false;
+                document.getElementById('result').innerText = "Danh sách đã được làm mới!";
+                updateStatus();
+            }
+        }
+
+        updateStatus();
     </script>
 </body>
 </html>
