@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huyền Vực - Định Mệnh Luân Hồi</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #d4af37;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: radial-gradient(circle, #2c2c2c, #000);
+        }
+        .container {
+            text-align: center;
+            border: 2px solid #d4af37;
+            padding: 40px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px #d4af37;
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; }
+        p { color: #ccc; margin-bottom: 30px; }
+        #result {
+            font-size: 1.8em;
+            font-weight: bold;
+            height: 60px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px #ff4500;
+        }
+        button {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+        .intro { font-style: italic; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Huyền Vực</h1>
+    <p>— Quay bánh xe định mệnh để chọn căn cốt của bạn —</p>
+    
+    <div id="result">Đang chờ lệnh...</div>
+    
+    <button onclick="randomChar()">XOAY CHUYỂN CẢI MỆNH</button>
+    
+    <div class="intro">"Ánh sáng hay Bóng tối? Thiên mệnh hay Ma tâm?"</div>
+</div>
+
+<script>
+    const chars = [
+        "✨ Thiên Giới - Long Tộc",
+        "✨ Thiên Giới - Hồ Tộc",
+        "✨ Thiên Giới - Thần Thú Hộ Pháp",
+        "🌾 Nhân Giới - Hoàng Tộc Trường Minh",
+        "🌾 Nhân Giới - Quốc Sư/Thừa Tướng",
+        "🌾 Nhân Giới - Đại Phu Yên Hạ",
+        "😈 Ma Giới - Tà Thần Ma Cung",
+        "😈 Ma Giới - Tứ Đại Ma Thú",
+        "😈 Ma Giới - Tiểu Ma Quân",
+        "⚖️ Âm Giới - Thập Đại Diêm La",
+        "⚖️ Âm Giới - Hắc Bạch Vô Thường",
+        "⚖️ Âm Giới - Mạnh Bà Chưởng Quản",
+        "🦊 Yêu Giới - Giao Nhân Bích Hải",
+        "🦊 Yêu Giới - Miêu Tinh Liễu Ngọc Phong",
+        "🦊 Yêu Giới - Xà Tinh Huyền Long Đàm"
+    ];
+
+    function randomChar() {
+        const resultDiv = document.getElementById('result');
+        let count = 0;
+        
+        // Hiệu ứng chạy chữ random trước khi dừng
+        const interval = setInterval(() => {
+            resultDiv.innerText = chars[Math.floor(Math.random() * chars.length)];
+            count++;
+            if (count > 20) {
+                clearInterval(interval);
+                const finalChar = chars[Math.floor(Math.random() * chars.length)];
+                resultDiv.innerHTML = `<span style="color: #ffcc00">★ ${finalChar} ★</span>`;
+            }
+        }, 50);
+    }
+</script>
+
+</body>
+</html>
