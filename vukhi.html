@@ -6,134 +6,45 @@
     <title>Huyền Vực - Thần Binh Các</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --bg: #0a0a0a;
-            --card: #161616;
-            --red: #ff3e3e;
-            --gold: #ffcf40;
-            --purple: #bf40ff;
-            --blue: #40a0ff;
-            --gray: #888;
-        }
-        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid #333; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 0 40px rgba(0,0,0,1); }
-        
-        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 1.5em; margin-bottom: 5px; }
-        .desc { font-size: 0.8em; color: var(--gray); margin-bottom: 20px; }
-
-        #weapon-display { 
-            height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px dashed #444; margin-bottom: 25px;
-            transition: 0.3s;
-        }
-        .rarity-tag { font-size: 0.7em; font-weight: 900; padding: 4px 12px; border-radius: 50px; margin-bottom: 10px; text-transform: uppercase; }
-        .weapon-name { font-size: 1.6em; font-weight: 800; margin: 0; }
-
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { 
-            background: #222; color: white; border: 1px solid #444; padding: 15px; 
-            border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s;
-        }
-        button:hover { background: #333; border-color: var(--gold); }
-        .btn-main { background: var(--red); border: none; color: white; }
-        .btn-main:hover { background: #ff5e5e; transform: translateY(-2px); }
-        
-        /* Hiệu ứng phẩm chất */
-        .rank-SSR { color: var(--gold); text-shadow: 0 0 15px var(--gold); }
-        .bg-SSR { background: var(--gold); color: black; }
-        .rank-SR { color: var(--purple); text-shadow: 0 0 10px var(--purple); }
-        .bg-SR { background: var(--purple); color: white; }
-        .rank-R { color: var(--blue); }
-        .bg-R { background: var(--blue); color: white; }
-        .rank-N { color: var(--gray); }
-        .bg-N { background: var(--gray); color: white; }
-
-        #history { margin-top: 20px; text-align: left; font-size: 0.75em; color: #666; max-height: 100px; overflow-y: auto; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px; }
+        :root { --bg: #0a0a0a; --card: #161616; --gold: #ffcf40; --red: #ff3e3e; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid var(--gold); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 0 40px rgba(255, 207, 64, 0.1); }
+        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; font-size: 1.5rem; }
+        .sub { color: #888; font-size: 0.8rem; margin-bottom: 20px; }
+        #weapon-res { height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); border-radius: 15px; margin-bottom: 25px; border: 1px dashed #444; }
+        .btn-roll { background: var(--gold); color: black; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: 800; cursor: pointer; font-size: 1.1em; transition: 0.2s; box-shadow: 0 4px 0 #b8860b; }
+        .btn-roll:active { transform: translateY(2px); box-shadow: none; }
+        .rank-SSR { color: var(--gold); text-shadow: 0 0 15px var(--gold); font-size: 1.6rem; font-weight: 900; }
+        .rank-SR { color: #bf40ff; font-weight: 700; font-size: 1.3rem; }
+        .rank-R { color: #40a0ff; font-size: 1.2rem; }
+        #log { font-size: 0.75rem; color: #555; text-align: left; max-height: 100px; overflow-y: auto; margin-top: 20px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h1>Thần Binh Các</h1>
-    <div class="desc">Duyên định linh khí, kiếm tìm thần binh</div>
-
-    <div id="weapon-display">
-        <div id="result-content">
-            <p style="color: #555;">Kính mời khai hỏa</p>
-        </div>
-    </div>
-
-    <div class="btn-group">
-        <button class="btn-main" onclick="roll(1)">QUAY 1 LẦN</button>
-        <button class="btn-main" onclick="roll(10)" style="background: #8B0000;">QUAY 10 LẦN</button>
-    </div>
-    
-    <button onclick="clearHistory()" style="width: 100%; margin-top: 10px; font-size: 0.7em; opacity: 0.5;">Xóa lịch sử</button>
-    
-    <div id="history">Lịch sử rèn đúc...</div>
+    <h1>THẦN BINH CÁC</h1>
+    <div class="sub">RÈN ĐÚC LINH KHÍ - ĐỊNH MỆNH KIẾM TÌM</div>
+    <div id="weapon-res">KÍNH MỜI KHAI HỎA</div>
+    <button class="btn-roll" onclick="roll()">QUAY VŨ KHÍ (GACHA)</button>
+    <div id="log">Lịch sử rèn đúc...</div>
 </div>
-
 <script>
     const weapons = [
-        // SSR - Tỉ lệ thấp nhất (5%)
-        { name: "Long Thần Kiếm", rank: "SSR" },
-        { name: "Phượng Hoàng Cung", qty: 1, rank: "SSR" },
-        { name: "Thiên Mệnh Trượng", rank: "SSR" },
-        { name: "Ma Vương Đao", rank: "SSR" },
-        
-        // SR - (15%)
-        { name: "Hàn Băng Thương", rank: "SR" },
-        { name: "Xích Diễm Phiến", rank: "SR" },
-        { name: "Lôi Đình Chùy", rank: "SR" },
-        
-        // R - (30%)
-        { name: "Thanh Phong Kiếm", rank: "R" },
-        { name: "Thiết Giáp Đao", rank: "R" },
-        
-        // N - (50%)
-        { name: "Kiếm Gỗ", rank: "N" },
-        { name: "Đao Sắt Cũ", rank: "N" },
-        { name: "Gậy Trúc", rank: "N" }
+        {n: "Long Thần Kiếm", r: "SSR"}, {n: "Ma Vương Đao", r: "SSR"}, {n: "Thiên Mệnh Trượng", r: "SSR"},
+        {n: "Hàn Băng Thương", r: "SR"}, {n: "Xích Diễm Phiến", r: "SR"}, {n: "Lôi Đình Chùy", r: "SR"},
+        {n: "Thanh Phong Kiếm", r: "R"}, {n: "Thiết Giáp Đao", r: "R"}, {n: "Kiếm Gỗ", r: "R"}
     ];
-
-    function getRandomWeapon() {
+    function roll() {
         const rand = Math.random() * 100;
-        let pool = [];
+        let pool;
+        if(rand < 5) pool = weapons.filter(x => x.r === "SSR");
+        else if(rand < 25) pool = weapons.filter(x => x.r === "SR");
+        else pool = weapons.filter(x => x.r === "R");
         
-        if (rand < 5) pool = weapons.filter(w => w.rank === "SSR");
-        else if (rand < 20) pool = weapons.filter(w => w.rank === "SR");
-        else if (rand < 50) pool = weapons.filter(w => w.rank === "R");
-        else pool = weapons.filter(w => w.rank === "N");
-        
-        return pool[Math.floor(Math.random() * pool.length)];
-    }
-
-    function roll(times) {
-        const display = document.getElementById('result-content');
-        const history = document.getElementById('history');
-        
-        if(times === 1) {
-            const w = getRandomWeapon();
-            display.innerHTML = `
-                <span class="rarity-tag bg-${w.rank}">${w.rank}</span>
-                <p class="weapon-name rank-${w.rank}">${w.name}</p>
-            `;
-            history.innerHTML = `<div>[${w.rank}] ${w.name}</div>` + history.innerHTML;
-        } else {
-            display.innerHTML = `<p class="weapon-name" style="font-size: 1.1em; color: var(--gold)">KẾT QUẢ X10</p><div id="ten-pull-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:5px; font-size: 0.7em;"></div>`;
-            const grid = document.getElementById('ten-pull-grid');
-            for(let i=0; i<10; i++) {
-                const w = getRandomWeapon();
-                grid.innerHTML += `<div class="rank-${w.rank}">• ${w.name}</div>`;
-                history.innerHTML = `<div style="color: gray;">[${w.rank}] ${w.name}</div>` + history.innerHTML;
-            }
-        }
-    }
-
-    function clearHistory() {
-        document.getElementById('history').innerHTML = "Lịch sử đã xóa...";
+        const w = pool[Math.floor(Math.random() * pool.length)];
+        document.getElementById('weapon-res').innerHTML = `<span style="font-size:0.7em; color:gray; text-transform:uppercase; letter-spacing:2px;">[${w.r}]</span><br><span class="rank-${w.r}">${w.n}</span>`;
+        document.getElementById('log').innerHTML = `<div>> Nhận được ${w.n} [${w.r}]</div>` + document.getElementById('log').innerHTML;
     }
 </script>
-
 </body>
 </html>
